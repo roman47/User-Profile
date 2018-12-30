@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}Display Profile{% endblock %}
+
+{% block body %}
+<div><b>First Name:</b>{{ user_profile.first_name }}</div>
+<div><b>Last Name:</b>{{ user_profile.last_name }}</div>
+<div><b>Date of Birth:</b>{{ user_profile.dob }}</div>
+<div><b>Email:</b>{{ user_profile.email }}</div>
+<div><b>Bio:</b>{{ user_profile.short_bio }}</div>
+<div><b>Avatar:</b>{{ user_profile.avatar }}</div>
+<a href="{% url 'accounts:edit_profile' %}" class="button">Edit Profile</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body %}
+<h1>Edit {{ form.instance|default:"User" }}</h1>
+{% autoescape on %}
+<form method="post" enctype="multipart/form-data" action>
+    {% csrf_token %}
+    {{ form.as_p }}
+<input type="submit" class="button" value="Save">
+</form>
+{% endautoescape %}
+
+{% endblock %}
