@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     email = models.EmailField()
     confirm_email = models.EmailField()
     short_bio = models.TextField(validators=[MinLengthValidator(10)])
-    avatar = models.ImageField(upload_to='documents/')
+    avatar = models.ImageField()
 
     def __str__(self):
         return self.first_name + " " + self.last_name
