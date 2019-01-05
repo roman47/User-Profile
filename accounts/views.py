@@ -108,12 +108,24 @@ def edit_profile(request):
 def change_password(request):
     if request.method == 'POST':
         form = forms.ValidatingPasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
+        user_profile = get_object_or_404(UserProfile)
+        #import pdb
+        #pdb.set_trace()
+        if user_profile.first_name in request.POST['new_password1']:
+            messages.error(request, 'The new password may not contain the '
+                                    'first name')
+        elif user_profile.last_name in request.POST['new_password1']:
+            messages.error(request, 'The new password may not contain the '
+                                    'last name')
+        elif request.user.username in request.POST['new_password1']:
+            messages.error(request, 'The new password may not contain the '
+                                    'username')
+        elif form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
             messages.success(request,
                              'Your password was successfully updated!')
-            user_profile = get_object_or_404(UserProfile)
+
             return render(request, 'accounts/profile/display_profile.html',
                           {'user_profile': user_profile})
         else:

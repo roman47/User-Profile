@@ -31,7 +31,7 @@ class UserProfileForm(forms.ModelForm):
 class ValidatingPasswordChangeForm(auth.forms.PasswordChangeForm):
     def clean_new_password1(self):
         password1 = self.cleaned_data.get('new_password1')
-        username = self.user.username.encode('ascii','ignore')
+        #username = self.user.username.encode('ascii','ignore')
         #import pdb
         #pdb.set_trace()
 
@@ -53,7 +53,7 @@ class ValidatingPasswordChangeForm(auth.forms.PasswordChangeForm):
         if all(c.isalpha() == first_isalpha for c in password1):
             raise forms.ValidationError("The new password must contain at "
                                         "least one letter and at least one "
-                                        "digit or" \
+                                        "digit or"
                                         " punctuation character.")
 
         if len(set(string.ascii_lowercase).intersection(password1)) <= 0:
@@ -76,9 +76,9 @@ class ValidatingPasswordChangeForm(auth.forms.PasswordChangeForm):
             raise forms.ValidationError("The new password must contain a "
                                         "special character")
 
-        if username in password1:
-            raise forms.ValidationError("The new password must not contain "
-                                        "the username")
+        #if username.decode('ascii') in password1:
+        #    raise forms.ValidationError("The new password must not contain "
+        #                                "the username")
 
         return password1
 
